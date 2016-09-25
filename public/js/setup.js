@@ -8,7 +8,10 @@ init();
 animate();
 
 function init() {
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+
     element = renderer.domElement;
     container = document.getElementById('main');
     container.appendChild(element);
@@ -16,10 +19,13 @@ function init() {
     effect = new THREE.StereoEffect(renderer);
 
     scene = new THREE.Scene();
+    scene.background = new THREE.Color('#e9ecf1');
+    console.dir(scene)
+
 
     // PerspectiveCamera( fov, aspect, near, far )
     // camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
-    camera = new THREE.PerspectiveCamera(90, 2560/1440, 0.001, 1000);
+    camera = new THREE.PerspectiveCamera(90, 2560 / 1440, 0.001, 1000);
     camera.position.set(0, 10, 0);
     // camera.lookAt(50,10,0)
     scene.add(camera);
@@ -50,7 +56,10 @@ function init() {
     window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-    var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
+    var light = new THREE.HemisphereLight('#0080FF', '#00FF00', 0.3);
+    // var light = new THREE.HemisphereLight('#800000', '#FFFFFF', 0.3);
+
+    console.dir(light)
     scene.add(light);
 
     var texture = THREE.ImageUtils.loadTexture(
@@ -103,16 +112,42 @@ function update(dt) {
 }
 
 function render(dt) {
-    effect.render(scene, camera);
+    // VR Version
+    // effect.render(scene, camera);
+    // Desktop Version
+    renderer.render(scene, camera);
 }
+var timeInMs = Date.now();
 
 function animate(t) {
     requestAnimationFrame(animate);
-    if(allBalls) {
-      allBalls.update();
-      if (playingBass) {
-        allBalls.add(0.25);
-      }
+    if (allBalls) {
+        allBalls.update();
+        if (playingTreble) {
+            render()
+            allBalls.add(0.25);
+            allBalls.add(0.25);
+        }
+        if (playingBass) {
+
+
+            var realNow = Date.now();
+            // console.log(realNow,timeInMs)
+            console.log(presentColor)
+            if ((realNow - timeInMs) > 500) {
+                
+                if (presentColor >= colorPalette.length) {
+                    presentColor = 0
+                } else { 
+                  presentColor += 1 
+                }
+                
+                scene.children[1].color = new THREE.Color(colorPalette[presentColor]);
+
+                timeInMs = realNow;
+            }
+
+        }
     }
     update(clock.getDelta());
     render(clock.getDelta());

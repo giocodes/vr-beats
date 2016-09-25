@@ -19,17 +19,30 @@
 //     var playingBass = false;
 
 $("body").keydown(function(event) {
-    console.log(event.which);
+    // console.log(event.which);
     if (event.which === 40) {
         location.reload();
     }
 
     if (event.which === 74) {
         if (!playingBass) {
+            // kick.volume(1);
+            // kick.play();
+            // allCircles.add(rms);
             bass.play()
             playingBass = true;
         }
-    // }
+    }
+    if (event.which === 70) {
+        if (!playingTreble) {
+            // kick.volume(1);
+            // kick.play();
+            // allCircles.add(rms);
+            treble.play()
+            playingTreble = true;
+        }
+    }
+
     // if (event.which === 70) {
     //     if (!playingBass) {
     //         bass.volume(1);
@@ -55,6 +68,14 @@ $("body").keyup(function(event) {
         playingBass = false;
         // kick.stop();
         bass.stop()
+
+        // kick.fade(1, 0, 200);
+        // kick.on('fade', () => kick.stop());
+    }
+    if (event.which === 70) {
+        playingTreble = false;
+        // kick.stop();
+        treble.stop()
 
         // kick.fade(1, 0, 200);
         // kick.on('fade', () => kick.stop());

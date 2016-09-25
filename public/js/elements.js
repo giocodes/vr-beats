@@ -1,13 +1,14 @@
 // 1) Set global variables
 var ball, sphere, allBalls;
 
-var colorPalette = ['#e9ecf1', '#f1f1cf', '#f4cec3', '#d3a0a9', '#7690c3', '#bec1e0'];
+var colorPalette = ['#f1f1cf', '#f4cec3', '#d3a0a9', '#7690c3', '#bec1e0'];
+var presentColor = 0;
 
 var BeatBall = function(sceneObj, variable, randomColor) {
-    var xStart = -100 + (200 * Math.random());
-    var yStart = 50 * Math.random();
+    var xStart = -200 + (400 * Math.random());
+    var yStart = 5 + (100 * Math.random());
     var zStart = 100
-    var radiusStart = .25;
+    var radiusStart = 5 * Math.random();
 
     var ballGeo = new THREE.SphereGeometry(radiusStart, 32, 32);
     var ballColor = new THREE.MeshBasicMaterial({ color: randomColor });
@@ -27,15 +28,15 @@ var BallHandler = function(sceneObj, speed, colors) {
 BallHandler.prototype.add = function(radius) {
     var aColor = this.colors[Math.floor(Math.random() * this.colors.length)];
     var singleBall = new BeatBall(this.scene, radius, aColor);
-    console.log(singleBall.id + ' is in!')
+    // console.log(singleBall.id + ' is in!')
     this.scene.add(singleBall);
     // this.queue.push(singleBall);
     this.queue[singleBall.id] = singleBall;
-    console.dir(this.queue)
+    // console.dir(this.queue)
 };
 
 BallHandler.prototype.remove = function(singleBall) {
-    console.dir(singleBall.id + ' is out!')
+    // console.dir(singleBall.id + ' is out!')
     delete this.queue[singleBall.id];
     // this.queue.pop();
     this.scene.remove(singleBall);
@@ -45,10 +46,10 @@ BallHandler.prototype.update = function() {
     // console.dir(this.queue);
     for (var item in this.queue) {
         // console.dir(item);
-        if (this.queue[item].position.z < -11 || this.queue[item].position.y < -11) {
+        if (this.queue[item].position.z < -150 || this.queue[item].position.y < -11) {
             this.remove(this.queue[item]);
         } else {
-            if (!playingBass) {
+            if (!playingTreble) {
             // not playing fall
                 this.queue[item].position.y -= this.speed;
                 this.queue[item].position.z -= this.speed/2;
@@ -92,11 +93,16 @@ function addElements(sceneObj) {
 
 
 // // Sounds
-var bass = new Howl({
-    src: ['sounds/bass.wav'],
+var playingBass = false;
+var playingTreble = false;
+var treble = new Howl({
+    src: ['sounds/foundsynth.mp3'],
     loop: true
 });
-var playingBass = false;
+var bass = new Howl({
+    src: ['sounds/foundbass.mp3'],
+    loop: true
+});
 
 // var bass, treble, voice;
 // // var analyzer;

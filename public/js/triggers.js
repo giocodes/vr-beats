@@ -29,7 +29,7 @@ $("body").keydown(function(event) {
             bass.play()
             playingBass = true;
         }
-    }
+    // }
     // if (event.which === 70) {
     //     if (!playingBass) {
     //         bass.volume(1);

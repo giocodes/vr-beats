@@ -4,10 +4,8 @@ var ball, sphere, allBalls;
 var colorPalette = ['#e9ecf1', '#f1f1cf', '#f4cec3', '#d3a0a9', '#7690c3', '#bec1e0'];
 
 var BeatBall = function(sceneObj, variable, randomColor) {
-    // xStart = 10 * Math.random();
-    var xStart = 20;
-    // yStart = 10 + (variable * 100);
-    var yStart = 10;
+    var xStart = -100 + (200 * Math.random());
+    var yStart = 50 * Math.random();
     var zStart = 100
     var radiusStart = .25;
 
@@ -46,10 +44,20 @@ BallHandler.prototype.remove = function(singleBall) {
 BallHandler.prototype.update = function() {
     // console.dir(this.queue);
     for (var item in this.queue) {
-    	// console.dir(item);
-        if (this.queue[item].position.z < -11) {
+        // console.dir(item);
+        if (this.queue[item].position.z < -11 || this.queue[item].position.y < -11) {
             this.remove(this.queue[item]);
-        } else { this.queue[item].position.z -= this.speed; }
+        } else {
+            if (!playingBass) {
+            // not playing fall
+                this.queue[item].position.y -= this.speed;
+                this.queue[item].position.z -= this.speed/2;
+            } else {
+            // while playing move forward
+                this.queue[item].position.z -= this.speed;
+            }
+
+        }
     }
 
     // Array Loop

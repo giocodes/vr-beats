@@ -17,7 +17,9 @@ function init() {
 
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
+    // PerspectiveCamera( fov, aspect, near, far )
+    // camera = new THREE.PerspectiveCamera(90, 1, 0.001, 700);
+    camera = new THREE.PerspectiveCamera(90, 2560/1440, 0.001, 1000);
     camera.position.set(0, 10, 0);
     // camera.lookAt(50,10,0)
     scene.add(camera);
@@ -106,6 +108,12 @@ function render(dt) {
 
 function animate(t) {
     requestAnimationFrame(animate);
+    if(allBalls) {
+      allBalls.update();
+      if (playingBass) {
+        allBalls.add(0.25);
+      }
+    }
     update(clock.getDelta());
     render(clock.getDelta());
 }

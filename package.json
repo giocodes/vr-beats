@@ -1,0 +1,28 @@
+{
+  "name": "vr-beats",
+  "version": "1.0.0",
+  "description": "vr-beats",
+  "main": "nodemon app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giocodes/vr-beats"
+  },
+  "keywords": [
+    "vr"
+  ],
+  "author": "@giocodes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/giocodes/node-express-template/issues"
+  },
+  "homepage": "https://github.com/giocodes/node-express-template#readme",
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "nodemon": "^1.10.2"
+  }
+}

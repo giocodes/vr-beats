@@ -17,22 +17,35 @@ BeatBox.prototype.add = function(file, key,rateis,name) {
     // this.beats[key].rate = rateis | 1;
     // console.log(this.beats[key])
     this.beats[key].playing = false;
-    this.beats[key].color = this.colorCount;
-    if (this.colorCount >= colorPalette.length)
+    if (this.colorCount === colorPalette.length)
         {this.colorCount = 0;}
     else {this.colorCount += 1;}
+    this.beats[key].color = this.colorCount;
 }
-s
 beatBox = new BeatBox();
-// Voices
-beatBox.add('ahh.mp3', 81);
-beatBox.add('deep.mp3', 87);
-beatBox.add('sayyou.mp3', 69);
-beatBox.add('thinkicanfly.mp3', 82);
-beatBox.add('wefound.mp3', 84);
-beatBox.add('youandi.mp3', 89);
-// Trebles
-beatBox.add('wfl-treble.mp3', 65,.99);
+// Trebles QWERT
+beatBox.add('wefound.mp3', 81); // Q
+beatBox.add('deep.mp3', 87); // W
+beatBox.add('sayyou.mp3', 69); // E
+beatBox.add('thinkicanfly.mp3', 82); // R
+beatBox.add('treble-allright.mp3', 84);// T
+beatBox.add('youandi.mp3', 89); // Y
+beatBox.add('treble-piano.mp3', 85); // U
+beatBox.add('treble-halo.mp3', 73); // I
+beatBox.add('treble-leanon.mp3', 79); // O
+beatBox.add('treble-paperplanes.mp3', 80); // P
+// Beats ASDFGH
+beatBox.add('beat-aha.mp3', 65); // A
+beatBox.add('treble-aha.mp3', 83); // S
+beatBox.add('beat-bruno.mp3', 68); // D
+beatBox.add('beat-feelgood.mp3', 70); // F
+beatBox.add('treble-macklemore.mp3', 71); //G
+beatBox.add('treble-happy.mp3', 72); // H
+beatBox.add('beat-rockyou.mp3', 74); // J
+beatBox.add('beat-audioslave.mp3', 75); // K
+beatBox.add('beat-cometogether.mp3', 76); // L
+// Extras M
+beatBox.add('treble-feelgood.mp3', 77); // M
 
 
 

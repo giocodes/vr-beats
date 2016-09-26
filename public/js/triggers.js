@@ -25,6 +25,7 @@ BeatBox.prototype.add = function(file, key,rateis,name) {
 beatBox = new BeatBox();
 // Trebles QWERT
 beatBox.add('wefound.mp3', 81); // Q
+beatBox.add('song.mp3', 32); // SPACE
 beatBox.add('deep.mp3', 87); // W
 beatBox.add('sayyou.mp3', 69); // E
 beatBox.add('thinkicanfly.mp3', 82); // R
@@ -56,9 +57,11 @@ $("body").keydown(function(event) {
     if (event.which === 40) {
         location.reload();
     }
-
+    if (event.which === 32) {
+        togglePlay(32);
+    }
     for (var link in beatBox.beats) {
-        if (event.which === +link) {
+        if (event.which === +link && event.which !== 32) {
             if (!beatBox.beats[link].playing) {
                 beatBox.beats[link].play();
                 beatBox.beats[link].playing = true;
@@ -67,28 +70,29 @@ $("body").keydown(function(event) {
     }
 
     // Toggle beat with space key
-    if (event.which === 32) {
-        togglePlay(bass);
-    }
+    // if (event.which === 32) {
+    //     togglePlay(32);
+    // }
 });
 
 
 
 $("body").keyup(function(event) {
     for (var link in beatBox.beats) {
-        if (event.which === +link) {
+        if (event.which === +link && event.which !== 32) {
             beatBox.beats[link].stop();
             beatBox.beats[link].playing = false;
         }
     }
 });
 
-function togglePlay(sound) {
-    if (sound.isPlaying) {
-        sound.stop();
-        sound.isPlaying = false;
+function togglePlay(key) {
+    console.log(beatBox.beats[key])
+    if (!beatBox.beats[key].playing) {
+        beatBox.beats[key].play();
+        beatBox.beats[key].playing = true;
     } else {
-        sound.play();
-        sound.isPlaying = true;
+        beatBox.beats[key].stop();
+        beatBox.beats[key].playing = false;
     }
 }

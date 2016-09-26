@@ -19,7 +19,7 @@ function init() {
     effect = new THREE.StereoEffect(renderer);
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color('#e9ecf1');
+
     console.dir(scene)
 
 
@@ -113,37 +113,48 @@ function update(dt) {
 
 function render(dt) {
     // VR Version
-    // effect.render(scene, camera);
+    effect.render(scene, camera);
     // Desktop Version
-    renderer.render(scene, camera);
+    // scene.background = new THREE.Color('#e9ecf1');
+    // renderer.render(scene, camera);
 }
 var timeInMs = Date.now();
+var beatBox;
 
 function animate(t) {
     requestAnimationFrame(animate);
 
-    if (bass.isPlaying) {
-        var realNow = Date.now();
-        // console.log(realNow,timeInMs)
-        console.log(presentColor)
-        if ((realNow - timeInMs) > 500) {
-            if (presentColor >= colorPalette.length) {
-                presentColor = 0
-            } else {
-                presentColor += 1
+    if (beatBox) {
+        if (beatBox.beats[32].playing) {
+            var realNow = Date.now();
+            // console.log(realNow,timeInMs)
+            // console.log(presentColor)
+            if ((realNow - timeInMs) > 500) {
+                if (presentColor >= colorPalette.length) {
+                    presentColor = 0
+                } else {
+                    presentColor += 1
+                }
+                scene.children[1].color = new THREE.Color(colorPalette[presentColor]);
+                // allBalls.add(0.25, colorPalette[presentColor], 32)
+                timeInMs = realNow;
             }
-            scene.children[1].color = new THREE.Color(colorPalette[presentColor]);
-            timeInMs = realNow;
-        }
 
+        }
     }
 
     if (allBalls) {
         allBalls.update();
         for (var key in beatBox.beats) {
-              if (beatBox.beats[key].playing) {
-                  allBalls.add(0.25,beatBox.beats[key].color,key);
-              }
+            if (beatBox.beats[key].playing) {
+                if (+key === 32) {
+                    var spaceColor = Math.floor(Math.random() * colorPalette.length)
+                    console.log(spaceColor)
+                    beatBox.beats[key].color = spaceColor;
+                }
+                console.log(beatBox.beats[key].color)
+                allBalls.add(0.25, beatBox.beats[key].color, key);
+            }
         }
     }
     update(clock.getDelta());

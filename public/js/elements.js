@@ -98,29 +98,22 @@ function addElements(sceneObj) {
 
 
 // // Sounds
-var playingBass = false;
-var playingTreble = false;
-var playingVocals = false;
-var bass = new Howl({
-    src: ['sounds/bass.wav'],
-    loop: true,
-    rate: 1
-        // volume: 0
-});
-bass.isPlaying = false;
+// var playingSong = false;
+// var playingTreble = false;
+// var playingVocals = false;
+// var song = new Howl({
+//     src: ['sounds/song.mp3'],
+//     loop: true,
+//     rate: 1
+//         // volume: 0
+// });
+// song.isPlaying = false;
 
-var treble = new Howl({
-    src: ['sounds/thinkicanfly.mp3'],
-    loop: true
-        // volume: 0
-});
-
-
-var vocals = new Howl({
-    src: ['sounds/wefound.mp3'],
-    loop: true
-        // volume: 0
-});
+// var treble = new Howl({
+//     src: ['sounds/thinkicanfly.mp3'],
+//     loop: true
+//         // volume: 0
+// });
 
 
 

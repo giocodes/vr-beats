@@ -5,19 +5,36 @@
 
 var BeatBox = function() {
     this.beats = {}
+    this.colorCount = 0;
 }
 
-BeatBox.prototype.add = function(file, key, name) {
+BeatBox.prototype.add = function(file, key,rateis,name) {
     this.beats[key] = new Howl({
         src: ['sounds/' + file],
-        loop: true
+        loop: true,
+        rate : rateis
     });
+    // this.beats[key].rate = rateis | 1;
+    // console.log(this.beats[key])
     this.beats[key].playing = false;
-
+    this.beats[key].color = this.colorCount;
+    if (this.colorCount >= colorPalette.length)
+        {this.colorCount = 0;}
+    else {this.colorCount += 1;}
 }
-
+s
 beatBox = new BeatBox();
-beatBox.add('sayyou.mp3', 81)
+// Voices
+beatBox.add('ahh.mp3', 81);
+beatBox.add('deep.mp3', 87);
+beatBox.add('sayyou.mp3', 69);
+beatBox.add('thinkicanfly.mp3', 82);
+beatBox.add('wefound.mp3', 84);
+beatBox.add('youandi.mp3', 89);
+// Trebles
+beatBox.add('wfl-treble.mp3', 65,.99);
+
+
 
 console.log(beatBox)
 
@@ -27,57 +44,19 @@ $("body").keydown(function(event) {
         location.reload();
     }
 
-
     for (var link in beatBox.beats) {
-        console.log(link)
         if (event.which === +link) {
-            console.log(beatBox.beats[link].playing)
             if (!beatBox.beats[link].playing) {
                 beatBox.beats[link].play();
                 beatBox.beats[link].playing = true;
             }
         }
-
     }
 
-
-    if (event.which === 74) {
-        if (!playingBass) {
-            // kick.volume(1);
-            // kick.play();
-            // allCircles.add(rms);
-            bass.play();
-            playingBass = true;
-        }
+    // Toggle beat with space key
+    if (event.which === 32) {
+        togglePlay(bass);
     }
-    if (event.which === 70) {
-        if (!playingTreble) {
-            // kick.volume(1);
-            // kick.play();
-            // allCircles.add(rms);
-            treble.play()
-            playingTreble = true;
-        }
-    }
-
-
-
-    // if (event.which === 70) {
-    //     if (!playingBass) {
-    //         bass.volume(1);
-    //         bass.play();
-    //         console.dir(bass)
-    //         playingBass = true;
-    //     }
-    // }
-    // if (event.which === 86) {
-    //     togglePlay();
-
-    // }
-
-    // kick.on('end', () => console.log('Psss!'));
-    // bass.on('end', () => console.log('Boom!'));
-
 });
 
 
@@ -87,29 +66,16 @@ $("body").keyup(function(event) {
         if (event.which === +link) {
             beatBox.beats[link].stop();
             beatBox.beats[link].playing = false;
-
         }
-
     }
-    if (event.which === 74) {
-        playingBass = false;
-        // kick.stop();
-        bass.stop()
-
-        // kick.fade(1, 0, 200);
-        // kick.on('fade', () => kick.stop());
-    }
-    if (event.which === 70) {
-        playingTreble = false;
-        treble.stop()
-    }
-    if (event.which === 85) {
-        playingVocals = false;
-        vocals.stop()
-    }
-    // if (event.which === 70) {
-    //     playingBass = false;
-    //     bass.fade(1, 0, 200);
-    //     bass.on('fade', () => bass.stop());
-    // }
 });
+
+function togglePlay(sound) {
+    if (sound.isPlaying) {
+        sound.stop();
+        sound.isPlaying = false;
+    } else {
+        sound.play();
+        sound.isPlaying = true;
+    }
+}

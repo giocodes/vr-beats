@@ -1,19 +1,23 @@
 // 1) Set global variables
 var ball, sphere, allBalls;
 
-var colorPalette = ['#f1f1cf', '#f4cec3', '#d3a0a9', '#7690c3', '#bec1e0'];
+var colorPalette = ['#f4cec3', '#d3a0a9', '#7690c3', '#bec1e0', '#8ad2bc', '#2fa478', '#223941', '#f29665', '#f4cfbd', '#b0657a', '#7d957f', '#b0657a', '#d57f80', '#eab595', '#e8d7bb'];
+
+// GRay e7e7e5
+// Yellow #f1f1cf
+
 var presentColor = 0;
 
-var BeatBall = function(sceneObj, variable, randomColor) {
-    var xStart = -200 + (400 * Math.random());
-    var yStart = 5 + (100 * Math.random());
-    var zStart = 100
+var BeatBall = function(sceneObj, variable, randomColor, key) {
+    var xStart = -300 + (600 * Math.random())
+    var yStart = 5 + (200 * Math.random());
+    var zStart = 300
     var radiusStart = 5 * Math.random();
 
     var ballGeo = new THREE.SphereGeometry(radiusStart, 32, 32);
     var ballColor = new THREE.MeshBasicMaterial({ color: randomColor });
     newBall = new THREE.Mesh(ballGeo, ballColor);
-    newBall.used = false;
+    newBall.key = key;
     newBall.position.set(xStart, yStart, zStart)
     return newBall;
 };
@@ -25,9 +29,10 @@ var BallHandler = function(sceneObj, speed, colors) {
     this.colors = colors;
 };
 
-BallHandler.prototype.add = function(radius) {
-    var aColor = this.colors[Math.floor(Math.random() * this.colors.length)];
-    var singleBall = new BeatBall(this.scene, radius, aColor);
+BallHandler.prototype.add = function(radius, color, key) {
+    // var aColor = this.colors[Math.floor(Math.random() * this.colors.length)];
+    var aColor = this.colors[color];
+    var singleBall = new BeatBall(this.scene, radius, aColor, key);
     // console.log(singleBall.id + ' is in!')
     this.scene.add(singleBall);
     // this.queue.push(singleBall);
@@ -37,27 +42,26 @@ BallHandler.prototype.add = function(radius) {
 
 BallHandler.prototype.remove = function(singleBall) {
     // console.dir(singleBall.id + ' is out!')
-    delete this.queue[singleBall.id];
+    delete this.queue[singleBall. id];
     // this.queue.pop();
     this.scene.remove(singleBall);
 };
 
 BallHandler.prototype.update = function() {
-    // console.dir(this.queue);
     for (var item in this.queue) {
-        // console.dir(item);
-        if (this.queue[item].position.z < -150 || this.queue[item].position.y < -11) {
+        if (this.queue[item].position.z < -300 || this.queue[item].position.y < -11) {
             this.remove(this.queue[item]);
         } else {
-            if (!playingTreble) {
-                // not playing fall
-                this.queue[item].position.y -= this.speed;
-                this.queue[item].position.z -= this.speed / 2;
-            } else {
-                // while playing move forward
-                this.queue[item].position.z -= this.speed;
+            for (var link in beatBox.beats) {
+                // console.log(this.queue[item].key)
+                if (!beatBox.beats[link].playing && this.queue[item].key === link) {
+                    this.queue[item].position.y -= (this.speed );
+                    this.queue[item].position.z -= (this.speed / 2);
+                } else if (beatBox.beats[link].playing && this.queue[item].key === link) {
+                    // while playing move forward
+                    this.queue[item].position.z -= this.speed;
+                }
             }
-
         }
     }
 
@@ -86,9 +90,10 @@ function addElements(sceneObj) {
     ball.position.set(0, 10, 50);
     // ball.position.set(50, 10, 0);
     // 2) Add objects to scene
-    allBalls = new BallHandler(sceneObj, 1, colorPalette)
+    // BallHandler(sceneObj, speed, colorPalette)
+    allBalls = new BallHandler(sceneObj, 4, colorPalette)
         // sceneObj.add(ball);
-    allBalls.add(.25)
+    allBalls.add(.25,'#d3a0a9', 81)
 }
 
 
@@ -98,26 +103,26 @@ var playingTreble = false;
 var playingVocals = false;
 var bass = new Howl({
     src: ['sounds/bass.wav'],
-    loop: true
-    // volume: 0
+    loop: true,
+    rate: 1
+        // volume: 0
 });
+bass.isPlaying = false;
 
 var treble = new Howl({
     src: ['sounds/thinkicanfly.mp3'],
     loop: true
-    // volume: 0
+        // volume: 0
 });
 
 
 var vocals = new Howl({
     src: ['sounds/wefound.mp3'],
     loop: true
-    // volume: 0
+        // volume: 0
 });
 
-var playingAll = false;
 
-// bass.play();
 
 // var bass, treble, voice;
 // // var analyzer;

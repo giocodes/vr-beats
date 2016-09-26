@@ -120,40 +120,30 @@ function render(dt) {
 var timeInMs = Date.now();
 
 function animate(t) {
-    // if (playingAll){
-    //   if(treble._state === 'loaded')
-    //   treble.play([id2,id1]);
-    //   playingAll = false;
-    //   // treble.play();
-    // }
     requestAnimationFrame(animate);
+
+    if (bass.isPlaying) {
+        var realNow = Date.now();
+        // console.log(realNow,timeInMs)
+        console.log(presentColor)
+        if ((realNow - timeInMs) > 500) {
+            if (presentColor >= colorPalette.length) {
+                presentColor = 0
+            } else {
+                presentColor += 1
+            }
+            scene.children[1].color = new THREE.Color(colorPalette[presentColor]);
+            timeInMs = realNow;
+        }
+
+    }
+
     if (allBalls) {
         allBalls.update();
-        
-        if (playingTreble) {
-            render()
-            allBalls.add(0.25);
-            allBalls.add(0.25);
-        }
-        if (playingBass) {
-
-
-            var realNow = Date.now();
-            // console.log(realNow,timeInMs)
-            console.log(presentColor)
-            if ((realNow - timeInMs) > 500) {
-                
-                if (presentColor >= colorPalette.length) {
-                    presentColor = 0
-                } else { 
-                  presentColor += 1 
-                }
-                
-                scene.children[1].color = new THREE.Color(colorPalette[presentColor]);
-
-                timeInMs = realNow;
-            }
-
+        for (var key in beatBox.beats) {
+              if (beatBox.beats[key].playing) {
+                  allBalls.add(0.25,beatBox.beats[key].color,key);
+              }
         }
     }
     update(clock.getDelta());

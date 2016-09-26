@@ -56,14 +56,14 @@ function init() {
     window.addEventListener('deviceorientation', setOrientationControls, true);
 
 
-    var light = new THREE.HemisphereLight('#0080FF', '#00FF00', 0.3);
+    var light = new THREE.HemisphereLight('#0080FF', '#00FF00', 0.5);
     // var light = new THREE.HemisphereLight('#800000', '#FFFFFF', 0.3);
 
     console.dir(light)
     scene.add(light);
 
     var texture = THREE.ImageUtils.loadTexture(
-        'textures/patterns/checker.png'
+        'textures/patterns/pentagon.png'
     );
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -120,9 +120,16 @@ function render(dt) {
 var timeInMs = Date.now();
 
 function animate(t) {
+    // if (playingAll){
+    //   if(treble._state === 'loaded')
+    //   treble.play([id2,id1]);
+    //   playingAll = false;
+    //   // treble.play();
+    // }
     requestAnimationFrame(animate);
     if (allBalls) {
         allBalls.update();
+        
         if (playingTreble) {
             render()
             allBalls.add(0.25);

@@ -50,11 +50,11 @@ BallHandler.prototype.update = function() {
             this.remove(this.queue[item]);
         } else {
             if (!playingTreble) {
-            // not playing fall
+                // not playing fall
                 this.queue[item].position.y -= this.speed;
-                this.queue[item].position.z -= this.speed/2;
+                this.queue[item].position.z -= this.speed / 2;
             } else {
-            // while playing move forward
+                // while playing move forward
                 this.queue[item].position.z -= this.speed;
             }
 
@@ -95,14 +95,29 @@ function addElements(sceneObj) {
 // // Sounds
 var playingBass = false;
 var playingTreble = false;
-var treble = new Howl({
-    src: ['sounds/foundsynth.mp3'],
-    loop: true
-});
+var playingVocals = false;
 var bass = new Howl({
-    src: ['sounds/foundbass.mp3'],
+    src: ['sounds/bass.wav'],
     loop: true
+    // volume: 0
 });
+
+var treble = new Howl({
+    src: ['sounds/thinkicanfly.mp3'],
+    loop: true
+    // volume: 0
+});
+
+
+var vocals = new Howl({
+    src: ['sounds/wefound.mp3'],
+    loop: true
+    // volume: 0
+});
+
+var playingAll = false;
+
+// bass.play();
 
 // var bass, treble, voice;
 // // var analyzer;

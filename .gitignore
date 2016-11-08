@@ -1,2 +1,4 @@
 node_modules
 public/sounds
+.DS_Store
+*.DS_Store

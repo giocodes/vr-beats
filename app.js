@@ -15,12 +15,7 @@ app.get('/', function (req, res) {
   res.render('index.html');
 });
 
-// you can set additional routes to any html file
-// app.get('/about', function (req, res) {
-//   res.render('about.html');
-// });
-
-// to watch changes to the files use 'npm start' => http://nodemon.io/ 
+// to watch changes to the files use 'npm start' => http://nodemon.io/
 app.listen(7357, function () {
-  console.log('They see me running... they listening on port 3000!', Date() );
+  console.log('They see me running... they listening on port 7357!', Date() );
 });

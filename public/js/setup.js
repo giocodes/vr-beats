@@ -20,7 +20,7 @@ function init() {
 
     scene = new THREE.Scene();
 
-    console.dir(scene)
+    // console.dir(scene)
 
 
     // PerspectiveCamera( fov, aspect, near, far )
@@ -59,7 +59,7 @@ function init() {
     var light = new THREE.HemisphereLight('#0080FF', '#00FF00', 0.5);
     // var light = new THREE.HemisphereLight('#800000', '#FFFFFF', 0.3);
 
-    console.dir(light)
+    // console.dir(light)
     scene.add(light);
 
     var texture = THREE.ImageUtils.loadTexture(

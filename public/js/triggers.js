@@ -53,7 +53,7 @@ beatBox.add('treble-feelgood.mp3', 77); // M
 console.log(beatBox)
 
 $("body").keydown(function(event) {
-    console.log(event.which);
+    // console.log(event.which);
     if (event.which === 40) {
         location.reload();
     }
@@ -87,7 +87,7 @@ $("body").keyup(function(event) {
 });
 
 function togglePlay(key) {
-    console.log(beatBox.beats[key])
+    // console.log(beatBox.beats[key])
     if (!beatBox.beats[key].playing) {
         beatBox.beats[key].play();
         beatBox.beats[key].playing = true;

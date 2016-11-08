@@ -5,6 +5,12 @@ A sound clip mixer and visualizer through Node and Express.
 **Description**
 Used howler.js to process HTML5 audio and three.js to create visualizations matching the beat of user chosen songs.
 
+**Screenshots**
+Desktop
+![Desktop](https://github.com/giocodes/vr-beats/blob/master/public/screenshots/vr-beats-desktop.gif "Desktop")
+Mobile VR Stereoscopic Display
+![VR Mobile](https://github.com/giocodes/vr-beats/blob/master/public/screenshots/vr-beats-mobile.gif "VR Mobile")
+
 **Features**
 1. Keymapping for 19 different audio clips
 2. Supports various audio file types. I found mp3 to be the most efficient when combining multiple sounds simultaniously.
@@ -16,7 +22,4 @@ Used howler.js to process HTML5 audio and three.js to create visualizations matc
  - Run `npm start`
  - Go to http://localhost:7357
 
-**Screenshots**
- - HTML as template rendering engine through http://ejs.co/
- - Watch changes to the files through http://nodemon.io/
 

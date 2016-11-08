@@ -11,7 +11,7 @@ Used howler.js to process HTML5 audio and three.js to create visualizations matc
 ##Mobile VR Stereoscopic Display
 ![VR Mobile](https://github.com/giocodes/vr-beats/blob/master/public/screenshots/vr-beats-mobile.gif "VR Mobile")
 
-[Video Demo](https://vimeo.com/190658086 "Video Demo")
+###[Video Demo](https://vimeo.com/190658086 "Video Demo")
 
 ##Features
 1. Keymapping for 19 different audio clips

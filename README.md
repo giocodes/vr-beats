@@ -6,9 +6,9 @@ A sound clip mixer and visualizer through Node and Express.
 Used howler.js to process HTML5 audio and three.js to create visualizations matching the beat of user chosen songs.
 
 **Screenshots**
-Desktop
+##Desktop
 ![Desktop](https://github.com/giocodes/vr-beats/blob/master/public/screenshots/vr-beats-desktop.gif "Desktop")
-Mobile VR Stereoscopic Display
+##Mobile VR Stereoscopic Display
 ![VR Mobile](https://github.com/giocodes/vr-beats/blob/master/public/screenshots/vr-beats-mobile.gif "VR Mobile")
 
 **Features**
